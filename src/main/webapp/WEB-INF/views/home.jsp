@@ -1,28 +1,33 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nykim
-  Date: 2022/12/13
-  Time: 12:55 오전
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-    <p> <a href="${pageContext.request.contextPath}/offers"> Show current offers</a></p>
-    <p> <a href="${pageContext.request.contextPath}/createoffer"> Add a new offer</a></p>
+<head>
+  <title>한성대학교</title>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/home.css/">
+</head>
+<body>
+<!-- Navigation Bar -->
+<jsp:include page="navbar.jsp" />
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-      <a href="javascript:document.getElementById('logout').submit()">Logout</a>
-    </c:if>
+<!-- Landing Page Sections -->
+<div class="section">
+  <h2>학년별 이수 학점 조회</h2>
+  <p>학년별 이수 학점을 조회할 수 있습니다.</p>
+  <button onclick="location.href='<c:url value='/courses' />'">이동하기</button>
+</div>
 
-    <form id="logout"  action="<c:url value="/logout" />"method="post">
-      <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
-    </form>
+<div class="section">
+  <h2>수강 신청하기</h2>
+  <p>강의를 수강 신청할 수 있습니다.</p>
+  <button onclick="location.href='<c:url value='/registration' />'">이동하기</button>
+</div>
 
-  </body>
+<div class="section">
+  <h2>수강 신청 조회</h2>
+  <p>수강 신청한 강의를 조회할 수 있습니다.</p>
+  <button onclick="location.href='<c:url value='/registrationStatus' />'">이동하기</button>
+</div>
+</body>
 </html>

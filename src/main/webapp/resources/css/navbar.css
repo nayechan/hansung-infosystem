@@ -1,0 +1,34 @@
+.navbar {
+    background: #0099da url(https://info.hansung.ac.kr/jsp_21/images/top_bg.png) no-repeat left center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24);
+    overflow: hidden;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navbar h1 {
+    float: left;
+    margin: 0;
+    color: white;
+    font-size: 32px;
+}
+
+.navbar button {
+    float: right;
+    background-color: deepskyblue;
+    transition: 250ms;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    background-color: skyblue;
+}
+

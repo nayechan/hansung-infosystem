@@ -4,32 +4,38 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
+    <!-- Importing DAO context if needed -->
     <import resource="dao-context.xml" />
 
+    <!-- Define PasswordEncoder bean -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <!-- Configure Authentication Manager -->
     <security:authentication-manager>
-       <security:authentication-provider>
-          <security:user-service>
-              <security:user name="nykim" authorities="ROLE_USER" password="{noop}letmein"/>
-              <security:user name="alice" authorities="ROLE_USER" password="{noop}letmein"/>
-          </security:user-service>
-      </security:authentication-provider>
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
-                   users-by-username-query="select username, password, enabled from users where username=?"
-                   authorities-by-username-query="select username, authority from authorities where username=?" />
+                                        users-by-username-query="select username, password, 1 from users where username=?"
+                                        authorities-by-username-query="select username, authority from authorities where username=?"/>
+            <security:password-encoder ref="passwordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
 
+    <!-- Configure HTTP Security -->
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/" access="permitAll()"/>
+        <security:intercept-url pattern="/favicon.ico" access="permitAll()"/>
         <security:intercept-url pattern="/login" access="permitAll()"/>
-        <security:intercept-url pattern="/offers" access="permitAll()"/>
-        <security:intercept-url pattern="/createoffer" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/docreate" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/logout" access="permitAll()"/>
         <security:intercept-url pattern="/resources/**" access="permitAll()"/>
+        <security:intercept-url pattern="/courses" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/courseDetails" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/registration" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/registrationStatus" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/enroll/**" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/**" access="denyAll()"/>
 
+        <!-- Configure Form Login -->
         <security:form-login login-page="/login"/>
-        <security:logout/>
+        <security:logout logout-url="/logout"/>
     </security:http>
 </beans>

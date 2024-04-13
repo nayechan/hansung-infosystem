@@ -15,21 +15,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Please sign in(Custom Login Form)</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <title>로그인</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/login.css/">
 </head>
 <body>
+<!-- Navigation Bar -->
+<jsp:include page="navbar.jsp" />
 <div class="container">
     <form class="form-signin" method="post" action="<c:url value="/login" />">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">로그인</h2>
 
         <c:if test="${not empty errorMsg}">
-            <div style="color: #ff0000;"> <h3> ${errorMsg} </h3></div>
+            <div style="color: #ff0000; font-size: 12px;"> <h3> ${errorMsg} </h3></div>
         </c:if>
 
         <c:if test="${not empty logoutMsg}">
-            <div style="color: #0000ff;" > <h3> ${logoutMsg} </h3></div>
+            <div style="color: #0000ff; font-size: 12px;" > <h3> ${logoutMsg} </h3></div>
         </c:if>
 
         <p>
